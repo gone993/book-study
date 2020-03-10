@@ -9,6 +9,8 @@ import com.gonnim.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,22 @@ public class PostsService {
 
         return new PostsResponseDto(entity);
     }
+
+    public List<PostsListResponseDto> findBooks (String category, String keyword) {
+        List<Posts> entities = null;
+        if("title".equals(category)) {
+            entities = postsRepository.findByTitle(keyword);
+        } else if("author".equals(category)) {
+            entities = postsRepository.findByAuthor(keyword);
+        } else {
+            entities = postsRepository.findByContent(keyword);
+        }
+        //Posts entity = postsRepository.findBy
+        return entities.stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
 
     @Transactional
     public void delete (Long id) {

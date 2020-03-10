@@ -1,11 +1,14 @@
 package com.gonnim.book.springboot.web;
 
 import com.gonnim.book.springboot.service.posts.PostsService;
+import com.gonnim.book.springboot.web.dto.PostsListResponseDto;
 import com.gonnim.book.springboot.web.dto.PostsResponseDto;
 import com.gonnim.book.springboot.web.dto.PostsSaveRequestDto;
 import com.gonnim.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -32,11 +35,18 @@ public class PostsApiController {
         return id;
     }
 
-
     //조회
     @GetMapping("/api/v1/posts/{id}")
     public PostsResponseDto findById (@PathVariable Long id) {
         return postsService.findById(id);
+    }
+
+    //검색
+    @GetMapping("/api/v1/posts/{category}/{keyword}")
+    public List<PostsListResponseDto> findBooks(@PathVariable String category, @PathVariable String keyword) {
+        System.out.println("@@@@@@ category ::: " + category);
+        System.out.println("@@@@@@ keyword ::: " + keyword);
+        return postsService.findBooks(category, keyword);
     }
 
 }
