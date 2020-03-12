@@ -1,12 +1,12 @@
 {{>layout/header}}
 
-<h1>스프링 부트로 시작하는 웹 서비스 Ver.2</h1>
+<h1>고은이네 도서관</h1>
 <div class="col-md-12">
     <!--로그인 기능 영역-->
     <div class="row">
         <div class="col-md-6">
             <a href="/posts/save" role="button"
-                        class="btn btn-primary">글 등록</a>
+                        class="btn btn-primary">도서 등록</a>
                         {{#userName}}
                             Logged in as: <span id="user">{{userName}}</span>
                             <a href="/logout" class="btn btn-info active"
@@ -23,7 +23,8 @@
     </div>
     <br>
     <!--목록 출력 영역-->
-    <table class="table table-horizontal table-bordered" id="indextable">
+ <div class="container">
+    <table class="table table-horizontal table-hover" id="indextable">
         <thead class="thead-strong">
         <tr>
             <th>게시글번호</th>
@@ -36,13 +37,26 @@
         {{#posts}}
             <tr>
                 <td>{{id}}</td>
-                <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                <td><a href="/posts/content/{{id}}">{{title}}</a></td>
                 <td>{{author}}</td>
                 <td>{{modifiedDate}}</td>
             </tr>
         {{/posts}}
         </tbody>
     </table>
+    <hr/>
+    <div class="text-center">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
 
     <!--검색-->
     <div>
@@ -53,7 +67,7 @@
     </select>
 
     <input type="text"
-                        id="find_title" placeholder="검색하려는 내용을 입력하세요">
+                        id="find_keyword" placeholder="검색하려는 내용을 입력하세요">
 
     <button type="button" id="btn-find">검색</button>
 

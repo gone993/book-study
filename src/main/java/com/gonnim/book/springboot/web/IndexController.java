@@ -44,6 +44,14 @@ public class IndexController {
         return "posts-update";
     }
 
+    @GetMapping("/posts/content/{id}")
+    public String postsContent(@PathVariable Long id, Model model) {
+        PostsResponseDto dto = postsService.findById(id);
+        model.addAttribute("post", dto);
+
+        return "posts-content";
+    }
+
     @GetMapping("posts/search/{category}/{keyword}")
     public String searchPosts(@PathVariable String category, @PathVariable String keyword, Model model) {
        List<PostsListResponseDto> dtos = postsService.findBooks(category, keyword);
